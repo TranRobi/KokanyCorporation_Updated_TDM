@@ -1,10 +1,3 @@
-:root::-webkit-scrollbar {
-	display: none;
-}
-:root {
-	scrollbar-width: none;
-	-ms-overflow-style: none;
-}
 .logo-header {
 	align-items: center;
 }
@@ -13,9 +6,9 @@
 	height: 50%;
 }
 .main-text {
-	text-align: center;
+	text-align: left;
 	float: right;
-	width: 80%;
+	width: 75%;
 	background-color: white;
 	padding: 2rem;
 }
@@ -54,6 +47,7 @@
 	border-radius: 100%;
 }
 .introduc {
+	height: 50%;
 	margin: 10px;
 	padding: 2rem;
 	width: 50%;
@@ -69,4 +63,8 @@
 
 p {
 	text-align: justify;
+}
+
+.margintop {
+	margin-top: 4rem;
 }

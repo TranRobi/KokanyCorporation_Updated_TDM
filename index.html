@@ -18,10 +18,10 @@
 					<a href="#logistic">1.Logistical Informations</a>
 					<a href="#membersIntro">2. Introduction</a>
 					<a href="#comps">3. Competitions so far</a>
-					<a href="">4. Software</a>
+					<a href="#software">4. Software</a>
 					<ul>
-						<li><a href="">4.1 Image recognition</a></li>
-						<li><a href="">4.2 Communications</a></li>
+						<li><a href="#imagerec">4.1 Image recognition</a></li>
+						<li><a href="#commu">4.2 Communications</a></li>
 						<li><a href="">4.3 Human-robot interface</a></li>
 					</ul>
 					<a href="">5. Hardware</a>
@@ -82,7 +82,7 @@
 						too.
 					</p>
 				</div>
-				<div id="membersIntro">
+				<div id="membersIntro" class="margintop">
 					<h1>Members of the team</h1>
 					<div class="introduc">
 						<img src="img/pfp6.jpg" alt="Our mentor pfp" />
@@ -147,7 +147,7 @@
 						</p>
 					</div>
 				</div>
-				<div id="comps">
+				<div id="comps" class="margintop">
 					<h1>Competitions we attended so far</h1>
 					<div class="comps-box">
 						<h3>MIRK (Hungarian Youth Robo Cup) year 2024</h3>
@@ -244,6 +244,263 @@
 							the motors broke in some parts of the arena and we couldn't reused
 							them in the following year.
 						</p>
+					</div>
+				</div>
+				<div id="software" class="margintop">
+					<h1>Software</h1>
+					<div class="simplify">
+						<h2>Simplifying our software with device trees</h2>
+						<p>
+							Last year we used a library called
+							<a
+								href="https://git.kernel.org/pub/scm/utils/i2c-tools/i2c-tools.git/about/"
+							>
+								libi2c</a
+							>
+							to control some of our stepper motors using an external
+							<a href="https://www.microchip.com/en-us/product/MCP23017"
+								>MCP23017 GPIO expander</a
+							>. Since then we have switched to using servos for our robotic
+							arm. We also wanted to make our software more flexible, and the
+							best way to do this was ripping out the useless code and using the
+							right tools for the job.
+						</p>
+						<p>
+							While programs are allowed to just use libi2c, it adds (often
+							redundant) extra code to a project. The Kernel actually has
+							drivers for a lot of common ICs such as GPIO expanders—like the
+							MCP23017 we used—or PWM controllers like the
+							<a href="https://www.adafruit.com/product/815">PCA9685</a>.
+						</p>
+						<p>
+							One improvement we've made was deleting the I2C parts from our
+							code, and instead using the
+							<a
+								href="https://elixir.bootlin.com/linux/latest/source/drivers/pwm/pwm-pca9685.c"
+								>kernel driver</a
+							>
+							instead. This is great because we can just interact with the
+							userspace PWM API via something like
+							<a href="https://github.com/zsoltiv/libhwpwm/tree/master"
+								>libhwpwm</a
+							>
+							(more on that later).
+						</p>
+						<p>
+							To achieve this, we wrote a
+							<a
+								href="https://github.com/zsoltiv/kokanybot/blob/master/overlays/kokanyservoctl.dts"
+								>device tree overlay</a
+							>. Device tree overlays are kind of like patch files for
+							<a
+								href="https://www.kernel.org/doc/html/latest/devicetree/usage-model.html"
+								>device trees</a
+							>. This file allows us to tell Linux what chips are available on
+							certain I2C addresses.
+						</p>
+					</div>
+					<div class="tcpToUdp">
+						<h2>Switching from TCP to UDP</h2>
+						<p>
+							Robotics taught us just how fragile computers are when subjected
+							to harsher environments. Short circuits may occur, components
+							might get knocked against a robot's frame, boards can overheat,
+							all of which can result in a robot rebooting or shutting down
+							entirely.
+						</p>
+						<p>
+							In our previous competitions, we have <i>always</i> had faults
+							like this occur. If things were going too well, then our UTP cable
+							slipped out of our control station's Ethernet port. In these
+							cases, we almost always had to reboot our robot and do the
+							software side of the setup again and then reconnect, wasting
+							precious time.
+						</p>
+						<p>
+							Mitigating these issues while sticking with TCP sockets would mean
+							having to handle potential connection issues every time we
+							send/receive data. Instead of doing that, we've been making steady
+							progress to switch over to UDP, which is a different
+							communications protocol. As of now, the code which receives
+							keyboard input uses no TCP sockets, it's all stateless.
+						</p>
+						<p>
+							The main advantage of UDP compared to TCP is its statelessness:
+							networked programs do not need to
+							<code>connect()</code>, <code>listen()</code> nor
+							<code>accept()</code>, which also means no need to track clients;
+							you create a socket, and send/receive data over it using
+							<code>sendto()</code> and <code>recvfrom()</code>. This eliminates
+							the need for handling reconnections.
+						</p>
+						<p>
+							The main downsides of UDP are that it does not guarantee data
+							packets arriving in the correct order nor does it guarantee that
+							they arrive <i>at all</i>. This is not really an issue for us,
+							since the entire network is point-to-point with no more than two
+							hosts, and we have yet to experience any problems.
+						</p>
+					</div>
+					<div class="gasRemoving">
+						<h2>Removing gas sensing code</h2>
+						<p>
+							The rulebook's
+							<a
+								href="https://oarkit.intelligentrobots.org/home/wp-content/uploads/2023/10/RoboCupRescue-RMRC-2024-Rulebook-working-draft-2023-10-15.pdf"
+								>latest draft</a
+							>
+							does not mention CO<sub>2</sub> sensing, therefore we've removed
+							all code related to it. If a later draft brings it back, we can
+							just reuse a previous commit, as we've often done during
+							development.
+						</p>
+					</div>
+					<div class="image-recognision" id="imagerec">
+						<h2>4.1 Training an object detection model</h2>
+
+						<p>
+							Last time, one of the most challenging aspects of the competition
+							was the object detection feature robots needed. Back in Bordeaux,
+							we failed to detect anything and got 0 points for object
+							detection. We definitely needed to improve on that.
+						</p>
+
+						<p>
+							Firstly, we found a
+							<a
+								href="https://universe.roboflow.com/new-workspace-xqnz7/rmrc-dqa9p"
+								>large enough dataset</a
+							>
+							on the internet (1k+ photos), which was a godsend because it
+							spared us from having to manually take pictures and tag them.
+						</p>
+
+						<p>
+							Secondly, we switched from the outdated YoloV5 to the up-to-date
+							YoloV8 which is supposedly better in every single way. We chose
+							the small version, because the larger the model, the slower
+							inference is, and while performance doesn’t really matter when
+							training, one can simply leave their computer running while they
+							are not home, it is still vital during inference, because our
+							laptops are not on par with our workstations at home.
+						</p>
+
+						<p>
+							To use our model, we wrote a script named kokanyrecognize at the
+							last minute. It wasn’t very performant nor really clean, so we
+							spent a significant amount of time working on it. So far it was
+							rewritten to use the new model, however it still has a long way to
+							go.
+						</p>
+						<p>Here is the result so far:</p>
+						<img
+							src="../img/inference.jpg"
+							alt="Image showcasing the accuracy of our model"
+						/>
+					</div>
+					<div class="communication" id="commu">
+						<h2>4.2 Communication</h2>
+						<p>
+							We interact with our robot using a few custom programs, named
+							KókányControl (kokanyctl) and KókányRecognize (kokanyrecognize).
+						</p>
+						<p>
+							KókányControl has a graphical interface for displaying the video
+							and the sensor data it receives from Kókánybot. It takes keyboard
+							input, and sends commands to the Raspberry Pi. It also recognizes
+							QR codes that appear on Kókánybot’s cameras.
+						</p>
+						<p>
+							KókányRecognize was written to reduce the complexity of
+							KókányControl, since image recognition functionality is only
+							needed in a few runs, and we can just launch KókányRecognize
+							whenever we need it. This also enabled us to build KókányControl
+							in pure C, since we would have needed to use C++ to build the
+							image recognition bits (which uses OpenCV).
+						</p>
+						<h2>Video and audio streaming</h2>
+						<p>
+							During tests, operators are only allowed to see the arenas from
+							their robot’s point of view. This meant we needed a way to find a
+							way to display the video data from the robot’s cameras.
+						</p>
+						<p>
+							We've learnt from our mistakes last year, and have opted for using
+							multiple cameras so that we have better peripheral vision while
+							controlling Kókánybot.
+						</p>
+						<p>
+							Multimedia related tasks are surprisingly computation heavy when
+							one is working with embedded systems. The CPU in the Raspberry Pi
+							4B+ is fairly capable, however we also had to consider power draw
+							and thermal related problems. We considered several video formats:
+							H.265, AV1 and H.264, but in the end we settled on using raw
+							frames from our cameras to minimize latency as much as possible,
+							since at the 2023 RoboCup, our camera's high latency caused a lot
+							of trouble.
+						</p>
+						<p>
+							One of our cameras is currently a
+							<a
+								href="https://www.raspberrypi.com/documentation/accessories/camera.html"
+								>Raspberry Pi Official Camera Module</a
+							>. This uses the new and improved libcamera stack which does not
+							play well with regular V4L2 programs—such as FFmpeg—hence we wrote
+							a
+							<a
+								href="https://github.com/zsoltiv/kokanybot/blob/master/kokanystream-front.sh"
+								>modified script</a
+							>
+							to work with the Pi Camera.
+						</p>
+						<p>
+							Linux assigns <code>/dev/videoN</code> to every camera. Since our
+							cameras have to be handled by separate programs, and have
+							different output formats, we must be able to tell them apart in a
+							consistent way. Linux provides a way to do this using
+							<a href="https://en.wikipedia.org/wiki/Udev">udev</a> rules. We
+							gathered the attributes of the cameras using
+							<code>udevadm</code>—a standard udev utility—and
+							<a
+								href="https://github.com/zsoltiv/kokanybot/blob/master/rules/60-camera.rules"
+								>wrote rules</a
+							>
+							to assign the <code>/dev/front-camera</code> and
+							<code>/dev/rear-camera</code>
+							names to our cameras.
+						</p>
+						<p>
+							On the client side, we implemented the decoding of the video data
+							using FFmpeg’s libavformat and libavcodec libraries. Rendering the
+							video frames was tricky to figure out because pretty much all
+							video encoders store pixels in YCbCr colour space, which SDL isn’t
+							the best for.
+						</p>
+						<p>
+							The APIs of the libav* libraries are <i>huge</i>. Thankfully we
+							only really needed the
+							<a
+								href="https://ffmpeg.org/doxygen/trunk/group__lavc__encdec.html"
+								target="_blank"
+								>high level decoding API</a
+							>. The
+							<a
+								href="https://github.com/namndev/FFmpegTutorial/blob/master/learn-ffmpeg-libav-the-hard-way.md"
+								target="_blank"
+								>Learn FFmpeg libav the Hard Way</a
+							>
+							tutorial combined with the
+							<a
+								href="https://git.ffmpeg.org/gitweb/ffmpeg.git/tree/HEAD:/doc/examples"
+								target="_blank"
+								>examples</a
+							>
+							in the project's documentation also made things much easier.
+						</p>
+					</div>
+					<div class="human-robot">
+						<h1>4.3 Human-robot interface</h1>
+						<p></p>
 					</div>
 				</div>
 			</div>
