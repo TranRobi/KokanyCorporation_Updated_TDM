@@ -1,6 +1,11 @@
 .logo-header {
 	align-items: center;
 }
+.logo-header h5,
+h3 {
+	margin: 0px;
+	padding: 0px;
+}
 .logo-header img {
 	width: 50%;
 	height: 50%;
