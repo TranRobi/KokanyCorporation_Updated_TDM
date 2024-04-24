@@ -1,0 +1,72 @@
+:root::-webkit-scrollbar {
+	display: none;
+}
+:root {
+	scrollbar-width: none;
+	-ms-overflow-style: none;
+}
+.logo-header {
+	align-items: center;
+}
+.logo-header img {
+	width: 50%;
+	height: 50%;
+}
+.main-text {
+	text-align: center;
+	float: right;
+	width: 80%;
+	background-color: white;
+	padding: 2rem;
+}
+.search {
+	height: fit-content;
+	background-color: wheat;
+	position: fixed;
+	text-align: center;
+	width: 15%;
+	height: 760px;
+	border: 2px black solid;
+}
+.links {
+	padding: 10px;
+	display: flex;
+	flex-direction: column;
+	text-align: left;
+}
+.links a {
+	text-decoration: none;
+	color: black;
+}
+.links ul {
+	margin: 0px;
+}
+.search a:hover {
+	color: gray;
+}
+.comps-box img {
+	width: 80%;
+	height: 80%;
+}
+.introduc img {
+	width: 50%;
+	height: 50%;
+	border-radius: 100%;
+}
+.introduc {
+	margin: 10px;
+	padding: 2rem;
+	width: 50%;
+	text-align: center;
+	border: 2px solid black;
+	border-radius: 20%;
+}
+#membersIntro {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+p {
+	text-align: justify;
+}
