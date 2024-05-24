@@ -219,6 +219,26 @@
         </div>
         <div class="margintop">
           <h1>Software</h1>
+          <div>
+            <h2>Human-robot interface</h2>
+            <p>
+              We can interact with our robot via any laptop or desktop computer (although that isn't very practical),
+              using either a Wireless or Ethernet (our choice) connection.
+            </p>
+            <p>
+              There are two main programs for interacting with Kókánybot:
+              <a href="https://github.com/zsoltiv/kokanyctl/blob/master/src/main.c"><code>kokanyctl</code></a>
+              and <a href="https://github.com/zsoltiv/kokanyctl/blob/master/kokanyrecognize.py"><code>kokanyrecognize</code></a>.
+              The former is used for controlling the robot's actuators and performing QR code recognition, while the latter uses
+              our custom image-recognition model to recognize hazmat signs. The details of the programs and the connection
+              are elaborated in the <i>Communication</i> section.
+            </p>
+            <p>
+              <a href="https://github.com/zsoltiv/kokanyctl/blob/master/src/main.c"><code>kokanyctl</code></a> takes
+              keyboard input and sends it to <a href="https://github.com/zsoltiv/kokanybot/blob/master/src/main.c"><code>a daemon</code></a>
+              running on Kókánybot which processes the raw input into usable events.
+            </p>
+          </div>
           <div class="simplify">
             <h2>Simplifying our software with device trees</h2>
             <p>
@@ -238,7 +258,8 @@
             </p>
             <p>
               While programs are allowed to just use libi2c, it adds (often
-              redundant) extra code to a project. The Kernel actually has
+              redundant) extra code to a project, not to mention a lot of extra
+              complexity since low-level driver code is not trivial. The Kernel actually has
               drivers for a lot of common ICs such as GPIO expanders—like the
               MCP23017 we used—or PWM controllers like the
               <a href="https://www.adafruit.com/product/815">PCA9685</a>.
@@ -281,7 +302,7 @@
             </p>
             <p>
               In our previous competitions, we have <i>always</i> had faults
-              like this occur. If things were going too well, then our UTP cable
+              like these occur. If things were going too well, then our UTP cable
               slipped out of our control station's Ethernet port. In these
               cases, we almost always had to reboot our robot and do the
               software side of the setup again and then reconnect, wasting
@@ -290,10 +311,11 @@
             <p>
               Mitigating these issues while sticking with TCP sockets would mean
               having to handle potential connection issues every time we
-              send/receive data. Instead of doing that, we've been making steady
-              progress to switch over to UDP, which is a different
-              communications protocol. As of now, the code which receives
-              keyboard input uses no TCP sockets, it's all stateless.
+              send/receive data. Instead of doing that, we've switched to UDP,
+              which is a different communications protocol. As of now,
+              none of our programs contain any any TCP related code making all
+              networking stateless (the multimedia bits <b>might</b> be stateful
+              but FFmpeg deals with all of that).
             </p>
             <p>
               The main advantage of UDP compared to TCP is its statelessness:
@@ -302,7 +324,9 @@
               <code>accept()</code>, which also means no need to track clients;
               you create a socket, and send/receive data over it using
               <code>sendto()</code> and <code>recvfrom()</code>. This eliminates
-              the need for handling reconnections.
+              the need for handling reconnections. This is great because our custom
+              network code sends only a stream of octets (detailed in the next section),
+              which always correspond to a keypress or key release.
             </p>
             <p>
               The main downsides of UDP are that it does not guarantee data
@@ -311,6 +335,46 @@
               since the entire network is point-to-point with no more than two
               hosts, and we have yet to experience any problems.
             </p>
+          </div>
+          <div>
+              <h2>Efficiently encoding keyboard input for low overhead</h2>
+              <p>
+                Keys on a keyboard usually correspond to
+                <a href="https://github.com/torvalds/linux/blob/master/include/uapi/linux/input-event-codes.h">scancodes</a>
+                in software. These values do not necessarily correspond to characters, since they're the raw values of keys,
+                and do not take the user's layout into account. SDL2 allows us to easily convert scancodes to keycodes which
+                <b>do</b> correspond to actual characters a user may type in. The macro used to this conversion is
+                <code>SDL_SCANCODE_TO_KEYCODE()</code>.
+              </p>
+              <p>
+                Sending keycodes over the wire is part of the solution, but we also need to send
+                the state of the key (whether it's pressed or not), ideally in a single byte.
+              </p>
+              <p>
+                A key can have two states meaning, two possible values, so it can be represented in log<sub>2</sub>2=1 bits.
+                This leaves 7 bits to represent keycodes, but there are more than 2<sup>7</sup> possible values.
+                However, we only handle WASD and numeric keys. Anything else is ignored on the server side.
+              </p>
+              <p>
+                We use some bit manipulation to encode and decode the actual data:
+                <a href="https://github.com/zsoltiv/kokanyctl/blob/e4ad1f0c0d85028a7224afd44b5ab4a433d12c42/src/net.c#L119">
+                  <code>net_encode_scancode()</code>
+                </a> in <code>kokanyctl</code> encodes the state into the most significant bit of the octet
+                by shifting a boolean (<code>false</code> and <code>true</code> correspond to 0 and 1 in C)
+                7 bits to the left (<code>pressed &lt;&lt; 7</code>) and then we bitwise OR it with the keycode.
+              </p>
+              <p>
+                On the receiving end, <code>kokanybot</code> processes the incoming data in
+                <a href="https://github.com/zsoltiv/kokanybot/blob/464a93d76f1663cc1291ffcf36dc81e000aed12f/src/input.c#L42">
+                    <code>input_process_key_event</code>
+                </a>. This calls an inline function, <code>is_key_pressed</code> which uses a boolean trick
+                (in C, everything aside from <code>0</code> is <code>true</code>,
+                so two boolean NOTs result in 0 or 1 if the value is anything but zero). <code>0x80</code> corresponds to 128 in
+                hexadecimal, which corresponds to the most significant bit (10000000<sub>(2)</sub>), where we stored the state of the key.
+                bitwise ANDing the keycode with 128 produces either 0 or 128, and this is what we convert to either 0 or 1
+                with the previous boolean trick. Afterwards we discard the most significant bit, because the eight bit represents the key
+                state and isn't part of the keycode itself. We then look up the correct function.
+              </p>
           </div>
           <div class="gasRemoving">
             <h2>Removing gas sensing code</h2>
@@ -411,31 +475,16 @@
               of trouble.
             </p>
             <p>
-              One of our cameras is currently a
-              <a
-                href="https://www.raspberrypi.com/documentation/accessories/camera.html"
-                >Raspberry Pi Official Camera Module</a
-              >. This uses the new and improved libcamera stack which does not
-              play well with regular V4L2 programs—such as FFmpeg—hence we wrote
-              a
-              <a
-                href="https://github.com/zsoltiv/kokanybot/blob/master/kokanystream-front.sh"
-                >modified script</a
-              >
-              to work with the Pi Camera.
-            </p>
-            <p>
-              Linux assigns <code>/dev/videoN</code> to every camera. Since our
-              cameras have to be handled by separate programs, and have
-              different output formats, we must be able to tell them apart in a
+              Linux assigns <code>/dev/videoN</code> to every camera. The kernel
+              does not guarantee the order of the camera devices,
+              however we must be able to tell them apart in a
               consistent way. Linux provides a way to do this using
               <a href="https://en.wikipedia.org/wiki/Udev">udev</a> rules. We
               gathered the attributes of the cameras using
               <code>udevadm</code>—a standard udev utility—and
-              <a
-                href="https://github.com/zsoltiv/kokanybot/blob/master/rules/60-camera.rules"
-                >wrote rules</a
-              >
+              <a href="https://github.com/zsoltiv/kokanybot/blob/master/rules/60-camera.rules">
+                wrote rules
+              </a>
               to assign the <code>/dev/front-camera</code> and
               <code>/dev/rear-camera</code>
               names to our cameras.
@@ -634,18 +683,6 @@
                     </a>
                   </td>
                 </tr>
-                <tr class="odd">
-                  <td>
-                    <a
-                      href="https://github.com/raspberrypi/rpicam-apps"
-                      target="_blank"
-                    >
-                      rpicam-apps
-                    </a>
-                  </td>
-                  <td>
-                    The programs used to capture the Pi Camera's video data
-                  </td>
                 </tr>
               </tbody>
             </table>
