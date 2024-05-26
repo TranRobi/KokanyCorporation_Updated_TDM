@@ -8,7 +8,7 @@ document.getElementById('totalcost').textContent = totalCost.toFixed(2);
 // generate table of contents
 
 const toc = document.getElementById('toc');
-const headings = document.querySelectorAll('.main-text > div h1, .main-text > div h2');
+const headings = document.querySelectorAll('.main-text > div h1, .main-text > div h2, .comps-box > h3');
 
 console.log(toc);
 console.log(headings);
