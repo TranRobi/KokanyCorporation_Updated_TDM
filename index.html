@@ -15,58 +15,19 @@
 					<h3>Kókány Corporations</h3>
 					<h5>Team Description Material</h5>
 				</div>
-				<div class="links">
-					<a href="#logistic">1.Logistical Informations</a>
-					<a href="#membersIntro">2. Introduction</a>
-					<a href="#comps">3. Competitions so far</a>
-					<a href="#software">4. Software</a>
-					<ul>
-						<li><a href="#imagerec">4.1 Image recognition</a></li>
-						<li><a href="#commu">4.2 Communications</a></li>
-						<li><a href="#humanrobot">4.3 Human-robot interface</a></li>
-					</ul>
-					<a href="#hardware">5. Hardware</a>
-					<ul>
-						<li>
-							<a href="#setup">5.1 Setup and packing, operation station </a>
-						</li>
-						<li><a href="#strategy">5.2 Mission strategy</a></li>
-						<li>
-							<a href="#test">5.3 Tests and experiments</a>
-						</li>
-						<li>
-							<a href="#strength"> 5.4 Strenght of the robot on the field </a>
-						</li>
-						<li>
-							<a href="#build">
-								5.5 The build and the development process of the robot.</a
-							>
-						</li>
-					</ul>
-					<a href="#learned">6. What we learned so far</a>
-					<a href="#until">7. What are we gonna do until the competition</a>
-					<a href="#source">8. Software packeges and hardware components</a>
-					<ul>
-						<li><a href="#softpackeges">8.1 Software packeges</a></li>
-						<li>
-							<a href="#hardwareComponents"
-								>8.2 hardware Components and estimated prices</a
-							>
-						</li>
-					</ul>
-				</div>
+				<div class="links" id="toc"></div>
 			</div>
 			<div class="main-text">
-				<div id="logistic">
+				<div>
 					<h1>Logisctical Informations</h1>
 					<h3><b>Team name:</b> Kókány Corporations</h3>
 					<h3>
 						<b>Organistaion:</b> Nyíregyházi SZC Széchenyi István Technikum és
-						Kollágium
+						Kollégium
 					</h3>
 					<h3><b>Country:</b> Hungary</h3>
-					<h3><b>Mentor:</b> Mr. Bakti András</h3>
-					<h3><b>Contact Person:</b> Mr. Bakti András</h3>
+					<h3><b>Mentor:</b> Mr. András Bakti</h3>
+					<h3><b>Contact Person:</b> Mr. András Bakti</h3>
 					<h3><b>Phone:</b> +3630/252-3931</h3>
 					<h3><b>Email:</b> info@robottep.hu</h3>
 					<h3>
@@ -91,11 +52,11 @@
 						too.
 					</p>
 				</div>
-				<div id="membersIntro" class="margintop">
+				<div class="margintop">
 					<h1>Members of the team</h1>
 					<div class="introduc">
+						<h2>Mr. András Bakti</h2>
 						<img src="img/pfp6.jpg" alt="Our mentor pfp" />
-						<h2>Mr. Bakti András</h2>
 						<h4>Role: Mentor</h4>
 						<p>
 							Mr. Bakti András is our mentor. He focuses on making sponsorship
@@ -106,8 +67,8 @@
 						</p>
 					</div>
 					<div class="introduc">
+						<h2>Máté Mester</h2>
 						<img src="img/pfp1.jpg" alt="Máté" />
-						<h2>Mester Máté</h2>
 						<h4>Role: Hardware</h4>
 						<p>
 							Máté focuses on the mechanical aspect of our robot, he works on
@@ -119,8 +80,8 @@
 						</p>
 					</div>
 					<div class="introduc">
-						<img src="img/pfp3.jpg" alt="Robi" />
 						<h2>Tran Duy Dat</h2>
+						<img src="img/pfp3.jpg" alt="Robi" />
 						<h4>Role: Hardware</h4>
 						<p>
 							Dat also focuses on the mechanical aspect of the robot, he designs
@@ -133,8 +94,8 @@
 						</p>
 					</div>
 					<div class="introduc">
+						<h2>Bence Vadász</h2>
 						<img src="img/pfp4.jpg" alt="Bence" />
-						<h2>Vadász Bence</h2>
 						<h4>Role: Hardware</h4>
 						<p>
 							Bence is the newest and youngest member of our team, he helps out
@@ -144,120 +105,177 @@
 						</p>
 					</div>
 					<div class="introduc">
+						<h2>Zsolt Vadász</h2>
 						<img src="img/pfp5.jpg" alt="Zsolt" />
-						<h2>Vadász Zsolt</h2>
 						<h4>Role: Programmer</h4>
 						<p>
 							Zsolt is responsible for the software of the robot. He's the one
 							who programmed the robot movement and arm functionality as well as
-							the image recognition software. He's intrested in micro controller
+							image recognition software. He's intrested in micro controller
 							programming as well as the manufacturing process of these
 							controllers. He's 19 years old.
 						</p>
 					</div>
 				</div>
-				<div id="comps" class="margintop">
-					<h1>Competitions we attended so far</h1>
+				<div class="margintop">
+					<h1>Competitions we have attended until now</h1>
 					<div class="comps-box">
-						<h3>MIRK (Hungarian Youth Robo Cup) year 2024</h3>
-						<img
-							src="./img/firstPlace1.jpg"
-							alt="Picture of the 2024 MIRK RMRC robot"
-						/>
-						<p>
-							MIRK 2024: This was our third competition and our third win with
-							this we are three times Hungarian champions. The biggest
-							difference is our robot's build. Firstly we moved our motors
-							inline with our electronics with this the height of the robot
-							decreased and the wheight optimalised. We also switched the energy
-							source instead of using 18650 litium batteries we used a Parkside
-							20V drill battery however with the more voltage we needed two
-							stepdowns instead of one. We also switched back to Motozero
-							instead of the L298n motor driver which helped us with the inner
-							space however the downside of the Motozero was the heat. We needed
-							to install a fan and put on a heatsink to prevent the driver to
-							overheat. We also used servo motors instead of stepper motors. We
-							also realized that the 3D printed parts weren't durable so we
-							found some metal cases and build a arm out of that. The controll
-							of the arm was done with the PCA9868 arduino board. We also finxed
-							the video latency and intalled a second camera for the back view
-							with this we used two person to operate. One was driving the main
-							robot and one was checking with him the camreras. We brought a
-							secondary monitor to see the camera output better.
-						</p>
-					</div>
-					<div class="comps-box">
-						<h3>Previous RoboCup23</h3>
-						<img
-							src="img/robocup23.jpg"
-							alt="Picture of the robot in RoboCup23"
-						/>
-						<p>
-							RoboÍCup23, Bordeaux France. The first international competition
-							we participate was the RoboCup23 last year. The first thing we
-							wanted to do was the arm. The mistake from MIRK(Hungarian Youth
-							Robo Cup) was that we couldn't use our arm and it prevented us
-							from getting critical points so that time we designed an arm which
-							used 28-BYJ stepper motors. We also tried making a custom PCB that
-							would provide us with powering all 8 stepper motors and also
-							controlling them. Unfortunately both the PCB and stepper arm
-							didn't work. We forgot a crucial part when designing the robot
-							arm. How much wheight can the motors hold on a certian distance?
-							Well in this case not a lot. When we gave 5V(This is the supported
-							voltage of the motor) the arm couldn't lift itself up, but when we
-							connected on the 12V it was enough to start moving and functioning
-							however the energy consumption also skyrocked. On the motor part
-							the socket for the motor was 3D printed, but the rough arena and
-							the conditions were too much for the basic L shape motor holder.
-							It broke in the middle of the competition. One of the bigger
-							challenge was the camera streaming and the image recognition.
-							Zsolti spent a great amount of time on debugging and developping.
-							The software was written in C and there wasn't a library for the
-							purpose we wanted. All in all the competition was really helpull
-							and we learned a lot from it.
-						</p>
-					</div>
-					<div class="comps-box">
-						<h3>MIRK (Hungarian Youth Robo Cup) year 2023</h3>
-						<img
-							src="./img/firstPlace2.jpg"
-							alt="Picture of the 2023 MIRK RMRC robot"
-						/>
-						<p>
-							The second MIRK was held in 2023 where we improved our motors and
-							wheels. We used bigger wheels which helped us in the uneven parts
-							of the arena. We also swhiched the robot arm that time we wanted
-							to use a custom arm and we tried our best to make one with the
-							separate parts we found in the workspace. Unfortunately the arm
-							didn't work it couldn't lift itself up. We also got better motors
-							which were half metal geared and half plastic geared which was a
-							big improvment because it didn't break this time. After winning
-							the championship our mentor Mr. Bakti András mentioned the
-							RoboCup23 and asked us if we want to participate in it and we said
-							yes and the preparations for the RoboCup begun.
-						</p>
-					</div>
-					<div class="comps-box">
-						<h3>MIRK (Hungarian Youth Robo Cup) year 2022</h3>
+						<h3>MIRK 2022</h3>
 						<img
 							src="img/firstPlace3.jpg"
 							alt="Picture of the 2022 MIRK RMRC robot"
 						/>
 						<p>
-							Our first competition was in 2022 march. As you can see the robot
-							was made out of 2 3mm plexi board which was cut with laser. The
-							arm was controlled with a Raspberry Pi 4 connected to a PCA9868
-							servo controller. We used 3 cells which provided 12V which we
-							converted down to 5V to the Raspberry. The motors was controlled
-							with a Motozero and the motors were running on 12V. unfortunately
-							the motors broke in some parts of the arena and we couldn't reused
-							them in the following year.
+							Our first competition was in March 2022. As you can see the robot
+							was made out of 2 3mm thick plexiglass sheets which were cut with
+							laser. The arm was controlled with a PCA9685 PWM controller and
+							our robotic arm used
+							<a href="https://www.towerpro.com.tw/product/sg90-7/">SG90</a>
+							servos. We used 3 salvaged 18650 cells connected in series to
+							provide 12V that we stepped down to 5V for the Raspberry Pi 4 and
+							the PCA9685. We used the cheapest hobby DC motors we had on hand,
+							which were controlled with a MotoZero and ran on 12V.
+							unfortunately the motors broke in some parts of the arena and we
+							couldn't reuse them in the following year. Our robotic arm for the
+							competition worked, and got us the win. We controlled the robot
+							with a PlayStation 4 controller, the code was written in Python
+							and can be viewed in this
+							<a href="https://github.com/zsoltiv/robocup">repository</a>,
+						</p>
+					</div>
+					<div class="comps-box">
+						<h3>MIRK 2023</h3>
+						<img
+							src="./img/firstPlace2.jpg"
+							alt="Picture of the 2023 MIRK RMRC robot"
+						/>
+						<p>
+							We participated in MIRK the next year in 2023 as well, for which
+							we improved our motors and wheels. We used bigger wheels which
+							helped us in the uneven parts of the arena. We also switched the
+							robotic arm. This time we wanted to use a custom arm so we tried
+							our best to make one with the parts we found in the workshop.
+							Unfortunately the arm didn't work, it couldn't move. We also got
+							better motors, half of which were metal geared and the other half
+							plastic geared. This was a big improvment because they didn't
+							break this time. After winning the championship our mentor, Mr.
+							András Bakti encouraged us to test ourselves at RoboCup23.
+						</p>
+					</div>
+					<div class="comps-box">
+						<h3>RoboCup 2023</h3>
+						<img
+							src="img/robocup23.jpg"
+							alt="Picture of the robot in RoboCup23"
+						/>
+						<p>
+							RoboCup 2023 in Bordeaux, France, was our first international
+							competition. Our main improvement was going to be a robotic arm.
+						</p>
+						<p>
+							Our robotic arm wasn't ready in time for that year's MIRK which
+							prevented us from achieving a higher score, so for RoboCup, we
+							designed an arm which used 28BYJ-48 stepper motors along with a
+							custom PCB for driving all 8 actuators. Unfortunately neither the
+							PCB nor the robotic arm worked well enough. We ended up scrapping
+							the PCB idea as prototyping it was costly (Zsolt had accidentally
+							mixed up two traces which made our first prototype completely
+							useless). We also forgot a crucial aspect of designing the arm: We
+							didn't account for how much weight the motors could hold.
+							Unfortunately not enough. When we supplied the motors with 5 volts
+							(the recommended voltage) the arm couldn't move. Eventually we
+							tried supplying 12V, which did work, but skyrocketed the energy
+							consumption and melted the arm in places.
+						</p>
+						<p>
+							The sockets for the motors were 3D printed and the rough
+							conditions were too much for the basic L shape motor holders. One
+							of them broke in the middle of the competition.
+						</p>
+						<p>
+							An other challenge was the camera streaming and the image
+							recognition, the latter of which was not working either. Zsolt had
+							spent a great amount of time on debugging and programming.
+						</p>
+						<p>
+							All in all the competition was really helpful and we learned a lot
+							from it.
+						</p>
+					</div>
+					<div class="comps-box">
+						<h3>MIRK 2024</h3>
+						<img
+							src="./img/firstPlace1.jpg"
+							alt="Picture of the 2024 MIRK RMRC robot"
+						/>
+						<p>
+							This was our third time competing at MIRK and our third win in
+							Hungary. With this we were three times Hungarian champions.
+						</p>
+						<p>
+							Kókánybot had come a long way. We moved our motors in line with
+							our electronics, decreasing the robot's height and optimizing the
+							weight distribution. We switched the energy source from salvaged
+							18650 lithium-ion batteries to a 20V Parkside drill battery,
+							however this way we had to add an extra buck converter. We also
+							switched back to using MotoZero from the previously used L298N
+							board due to space constraints, however the MotoZero could easily
+							overheat, so we needed to install a fan and put a heatsink on it
+							to prevent the driver from overheating. We switched from steppers
+							to servo motors. We had also realized that the 3D printed arm
+							wasn't durable enough so we used some metal parts we had on hand
+							and built an arm out of those. For driving the arm, we used
+							<a href="">Adafruit's PCA9685 board</a>. We also fixed the camera
+							latency issues and intalled a second camera for on the robot's
+							rear.
+						</p>
+						<p>
+							We had two operators. One was driving robot and the other was
+							assisting with the cameras. We had brought a secondary monitor
+							with us to see the camera output better.
 						</p>
 					</div>
 				</div>
-				<div id="software" class="margintop">
+				<div class="margintop">
 					<h1>Software</h1>
-					<div class="simplify">
+					<div>
+						<h2>Human-robot interface</h2>
+						<p>
+							We can interact with our robot via any laptop or desktop computer
+							(although that isn't very practical), using either a Wireless or
+							Ethernet (our choice) connection.
+						</p>
+						<p>
+							There are two main programs for interacting with Kókánybot:
+							<a
+								href="https://github.com/zsoltiv/kokanyctl/blob/master/src/main.c"
+								><code>kokanyctl</code></a
+							>
+							and
+							<a
+								href="https://github.com/zsoltiv/kokanyctl/blob/master/kokanyrecognize.py"
+								><code>kokanyrecognize</code></a
+							>. The former is used for controlling the robot's actuators and
+							performing QR code recognition, while the latter uses our custom
+							image-recognition model to recognize hazmat signs. The details of
+							the programs and the connection are elaborated in the
+							<i>Communication</i> section.
+						</p>
+						<p>
+							<a
+								href="https://github.com/zsoltiv/kokanyctl/blob/master/src/main.c"
+								><code>kokanyctl</code></a
+							>
+							takes keyboard input and sends it to
+							<a
+								href="https://github.com/zsoltiv/kokanybot/blob/master/src/main.c"
+								><code>a daemon</code></a
+							>
+							running on Kókánybot which processes the raw input into usable
+							events.
+						</p>
+					</div>
+					<div>
 						<h2>Simplifying our software with device trees</h2>
 						<p>
 							Last year we used a library called
@@ -276,9 +294,10 @@
 						</p>
 						<p>
 							While programs are allowed to just use libi2c, it adds (often
-							redundant) extra code to a project. The Kernel actually has
-							drivers for a lot of common ICs such as GPIO expanders—like the
-							MCP23017 we used—or PWM controllers like the
+							redundant) extra code to a project, not to mention a lot of extra
+							complexity since low-level driver code is not trivial. The Kernel
+							actually has drivers for a lot of common ICs such as GPIO
+							expanders—like the MCP23017 we used—or PWM controllers like the
 							<a href="https://www.adafruit.com/product/815">PCA9685</a>.
 						</p>
 						<p>
@@ -308,7 +327,7 @@
 							certain I2C addresses.
 						</p>
 					</div>
-					<div class="tcpToUdp">
+					<div>
 						<h2>Switching from TCP to UDP</h2>
 						<p>
 							Robotics taught us just how fragile computers are when subjected
@@ -319,8 +338,8 @@
 						</p>
 						<p>
 							In our previous competitions, we have <i>always</i> had faults
-							like this occur. If things were going too well, then our UTP cable
-							slipped out of our control station's Ethernet port. In these
+							like these occur. If things were going too well, then our UTP
+							cable slipped out of our control station's Ethernet port. In these
 							cases, we almost always had to reboot our robot and do the
 							software side of the setup again and then reconnect, wasting
 							precious time.
@@ -328,10 +347,11 @@
 						<p>
 							Mitigating these issues while sticking with TCP sockets would mean
 							having to handle potential connection issues every time we
-							send/receive data. Instead of doing that, we've been making steady
-							progress to switch over to UDP, which is a different
-							communications protocol. As of now, the code which receives
-							keyboard input uses no TCP sockets, it's all stateless.
+							send/receive data. Instead of doing that, we've switched to UDP,
+							which is a different communications protocol. As of now, none of
+							our programs contain any any TCP related code making all
+							networking stateless (the multimedia bits <b>might</b> be stateful
+							but FFmpeg deals with all of that).
 						</p>
 						<p>
 							The main advantage of UDP compared to TCP is its statelessness:
@@ -340,7 +360,10 @@
 							<code>accept()</code>, which also means no need to track clients;
 							you create a socket, and send/receive data over it using
 							<code>sendto()</code> and <code>recvfrom()</code>. This eliminates
-							the need for handling reconnections.
+							the need for handling reconnections. This is great because our
+							custom network code sends only a stream of octets (detailed in the
+							next section), which always correspond to a keypress or key
+							release.
 						</p>
 						<p>
 							The main downsides of UDP are that it does not guarantee data
@@ -350,7 +373,102 @@
 							hosts, and we have yet to experience any problems.
 						</p>
 					</div>
-					<div class="gasRemoving">
+					<div>
+						<h2>Network arcitecture</h2>
+						<p>
+							Kókánybot has to transport two kinds of data: keyboard input and
+							video data. There are two ways to go about transporting them: we
+							could have chosen to multiplex the input and the video and data
+							streams (similar to
+							<a href="https://stackoverflow.com/a/38727112">this SO answer</a>
+							implemented using the API). We chose the path of least resistance
+							though, and went with separate connections for each video feed and
+							input. Currently there are
+							<a
+								href="https://github.com/zsoltiv/kokanyctl/blob/03646de81618e50c38f7d2d41fce398d238cef72/src/main.c#L39"
+							>
+								two camera feeds
+							</a>
+							and a
+							<a
+								href="https://github.com/zsoltiv/kokanyctl/blob/03646de81618e50c38f7d2d41fce398d238cef72/src/main.c#L32"
+							>
+								connection for transporting keycodes </a
+							>. This allows us to avoid a lot of headaches and keep the
+							networking as stateless as possible.
+						</p>
+						<p>
+							We don't use any complicated protocols for data transmission,
+							because we'd liked to keep the processing needs as low as
+							possible.
+						</p>
+					</div>
+					<div>
+						<h2>Efficiently encoding keyboard input for low overhead</h2>
+						<p>
+							Keys on a keyboard usually correspond to
+							<a
+								href="https://github.com/torvalds/linux/blob/master/include/uapi/linux/input-event-codes.h"
+								>scancodes</a
+							>
+							in software. These values do not necessarily correspond to
+							characters, since they're the raw values of keys, and do not take
+							the user's layout into account. SDL2 allows us to easily convert
+							scancodes to keycodes which
+							<b>do</b> correspond to actual characters a user may type in. The
+							macro used to this conversion is
+							<code>SDL_SCANCODE_TO_KEYCODE()</code>.
+						</p>
+						<p>
+							Sending keycodes over the wire is part of the solution, but we
+							also need to send the state of the key (whether it's pressed or
+							not), ideally in a single byte.
+						</p>
+						<p>
+							A key can have two states meaning, two possible values, so it can
+							be represented in log<sub>2</sub>2=1 bits. This leaves 7 bits to
+							represent keycodes, but there are more than 2<sup>7</sup> possible
+							values. However, we only handle WASD and numeric keys. Anything
+							else is ignored on the server side.
+						</p>
+						<p>
+							We use some bit manipulation to encode and decode the actual data:
+							<a
+								href="https://github.com/zsoltiv/kokanyctl/blob/e4ad1f0c0d85028a7224afd44b5ab4a433d12c42/src/net.c#L119"
+							>
+								<code>net_encode_scancode()</code>
+							</a>
+							in <code>kokanyctl</code> encodes the state into the most
+							significant bit of the octet by shifting a boolean (<code
+								>false</code
+							>
+							and <code>true</code> correspond to 0 and 1 in C) 7 bits to the
+							left (<code>pressed &lt;&lt; 7</code>) and then we bitwise OR it
+							with the keycode.
+						</p>
+						<p>
+							On the receiving end, <code>kokanybot</code> processes the
+							incoming data in
+							<a
+								href="https://github.com/zsoltiv/kokanybot/blob/464a93d76f1663cc1291ffcf36dc81e000aed12f/src/input.c#L42"
+							>
+								<code>input_process_key_event</code> </a
+							>. This calls an inline function,
+							<code>is_key_pressed</code> which uses a boolean trick (in C,
+							everything aside from <code>0</code> is <code>true</code>, so two
+							boolean NOTs result in 0 or 1 if the value is anything but zero).
+							<code>0x80</code> corresponds to 128 in hexadecimal, which
+							corresponds to the most significant bit (10000000<sub>(2)</sub>),
+							where we stored the state of the key. bitwise ANDing the keycode
+							with 128 produces either 0 or 128, and this is what we convert to
+							either 0 or 1 with the previous boolean trick. Afterwards we
+							discard the most significant bit, because the eight bit represents
+							the key state and isn't part of the keycode itself. We then
+							<a href="https://en.wikipedia.org/wiki/Lookup_table">look up</a>
+							the correct function.
+						</p>
+					</div>
+					<div>
 						<h2>Removing gas sensing code</h2>
 						<p>
 							The rulebook's
@@ -364,7 +482,7 @@
 							development.
 						</p>
 					</div>
-					<div class="image-recognision" id="imagerec">
+					<div>
 						<h2>4.1 Training an object detection model</h2>
 
 						<p>
@@ -407,7 +525,7 @@
 							alt="Image showcasing the accuracy of our model"
 						/>
 					</div>
-					<div class="communication" id="commu">
+					<div>
 						<h2>4.2 Communication</h2>
 						<p>
 							We interact with our robot using a few custom programs, named
@@ -449,31 +567,18 @@
 							of trouble.
 						</p>
 						<p>
-							One of our cameras is currently a
-							<a
-								href="https://www.raspberrypi.com/documentation/accessories/camera.html"
-								>Raspberry Pi Official Camera Module</a
-							>. This uses the new and improved libcamera stack which does not
-							play well with regular V4L2 programs—such as FFmpeg—hence we wrote
-							a
-							<a
-								href="https://github.com/zsoltiv/kokanybot/blob/master/kokanystream-front.sh"
-								>modified script</a
-							>
-							to work with the Pi Camera.
-						</p>
-						<p>
-							Linux assigns <code>/dev/videoN</code> to every camera. Since our
-							cameras have to be handled by separate programs, and have
-							different output formats, we must be able to tell them apart in a
-							consistent way. Linux provides a way to do this using
+							Linux assigns <code>/dev/videoN</code> to every camera. The kernel
+							does not guarantee the order of the camera devices, however we
+							must be able to tell them apart in a consistent way. Linux
+							provides a way to do this using
 							<a href="https://en.wikipedia.org/wiki/Udev">udev</a> rules. We
 							gathered the attributes of the cameras using
 							<code>udevadm</code>—a standard udev utility—and
 							<a
 								href="https://github.com/zsoltiv/kokanybot/blob/master/rules/60-camera.rules"
-								>wrote rules</a
 							>
+								wrote rules
+							</a>
 							to assign the <code>/dev/front-camera</code> and
 							<code>/dev/rear-camera</code>
 							names to our cameras.
@@ -507,68 +612,110 @@
 							in the project's documentation also made things much easier.
 						</p>
 					</div>
-					<div class="humanrobot" id="humanrobot">
+					<div>
 						<h2>4.3 Human-robot interface</h2>
 						<p>Still thinkking</p>
 					</div>
 				</div>
-				<div class="hardware" id="hardware">
+				<div>
 					<h1>Hardware</h1>
-					<div class="setup" id="setup">
+					<div>
 						<h2>5.1 Setup and packing, operation station</h2>
-						<p>
-							The robot's power supply is a Parkside 20V drill battery which is
-							easily attachable and switchable. We have 2 additional drill
-							batteries for backup if the other one ran out of power. We use 2
-							step-down for sourcing the voltage for the supported amount of the
-							hardware. The first step-down converts the 20V to 12V for the DC
-							motors, the other one is steps down the 12V to 5V to the RaspPi
-							and the robot arm. The base is designed to be portable which means
-							we can easily take it apart with screwing out a few screw.
-						</p>
-						<p>
-							The robot arm is made out of matel parts bought online. We decided
-							to used that because it's much stronger. That's the only part of
-							the robot which made out of metal the other parts are all made in
-							Fusion 360 and printed out. We used PLA at 50-60% fill. The robot
-							arm functions with 3 MG996r servo motors and the climber uses 2.
-							Adding up the servos we need to control 5 of them which connected
-							to the PCA9868 servo board.
-						</p>
 					</div>
-					<div class="strategy" id="strategy">
+					<div>
 						<h2>5.2 Mission strategy</h2>
 					</div>
-					<div class="test" id="test">
+					<div>
 						<h2>5.3 Tests and experiments</h2>
 					</div>
-					<div class="strength" id="strength">
+					<div>
 						<h2>5.4 Strenght of the robot on the field</h2>
 					</div>
-					<div class="build" id="build">
+					<div>
 						<h2>5.5 The build and the development process of the robot.</h2>
+						<div class="robot-build">
+							<h3>The building logics of our robots</h3>
+							<p>
+								We will demonstrate our build process in this sections. The
+								robot itself is divide to four parts.
+							</p>
+							<ul>
+								<li>The body of the robots</li>
+								<li>The movement part</li>
+								<li>The support arm (we call it Flipper)</li>
+								<li>The robot arm</li>
+							</ul>
+							<div class="wheels">
+								<h2>Movement structure</h2>
+								<p>
+									We were putting a lot of thought in our wheels, because in the
+									previous competitions the radius of the wheels weren't enough.
+									It always stuck on something high so this time we selected a
+									wheels which bigger in radius with that we started the
+									development for the rim the process was hard and we had many
+									fails in the implementation.
+								</p>
+								<div class="failed-attempts"></div>
+								<video
+									src="vids/wheel.mp4"
+									controls
+									width="960"
+									height="540s"
+								></video>
+							</div>
+							<div class="flipper">
+								<h2>Flipper (Support arm)</h2>
+								<video
+									src="./vids/flipper.mp4"
+									width="960"
+									height="540s"
+									controls
+								></video>
+							</div>
+							<div class="robot-arm">
+								<h2>Robot arm</h2>
+								<video
+									src="./vids/robot arm.mp4"
+									width="960"
+									height="540s"
+									controls
+								></video>
+							</div>
+							<div class="main-parts">
+								<h2>The main part of our robot</h2>
+								<video src="" controls width="960" height="540s"></video>
+							</div>
+						</div>
 					</div>
 				</div>
-				<div class="learned" id="learned">
+				<div>
 					<h1>6. What we learned so far</h1>
-					<p></p>
+					<p>
+						In the beginning we used
+						<a href="https://www.tinkercad.com/">TinkerCAD</a>
+						for 3D modelling, later on we switched to
+						<a href="https://www.autodesk.com/products/fusion-360/overview"
+							>AutoDesk Fusion360</a
+						>
+						and gained experience with it.
+					</p>
 				</div>
-				<div class="until" id="until">
+				<div>
 					<h1>7. What are we gonna do until the competition</h1>
 					<p>
 						We are facing an upcoming "event" in our life. In our country this
 						time of the year amd age all highschool student will be attending a
 						examination which will decide our future. Preparing to the
-						competition and at the same time studying to the upcoming test is
-						very hard so we are trying to devide our time accordingly. Of course
-						we want to get better grades and points from the exam as well as to
-						test more and more on the robot for the smallest gaps that could
-						accour on the competition.
+						competition and at the same time studying to our upcoming exams is
+						very difficult so we are trying to divide our time accordingly. Of
+						course we want to get better grades and points from the exam as well
+						as work more on the robot and test as many of the scenarios that
+						could accour during the competition.
 					</p>
 				</div>
-				<div class="source" id="source">
+				<div>
 					<h1>8. Software packeges and hardware components</h1>
-					<div class="softpackeges" id="softpackeges">
+					<div>
 						<h2>8.1 Software packeges</h2>
 						<table>
 							<tbody>
@@ -687,23 +834,10 @@
 										</a>
 									</td>
 								</tr>
-								<tr class="odd">
-									<td>
-										<a
-											href="https://github.com/raspberrypi/rpicam-apps"
-											target="_blank"
-										>
-											rpicam-apps
-										</a>
-									</td>
-									<td>
-										The programs used to capture the Pi Camera's video data
-									</td>
-								</tr>
 							</tbody>
 						</table>
 					</div>
-					<div class="hardwareComponents" id="hardwareComponents">
+					<div>
 						<h2>8.2 hardware Components and estimated prices</h2>
 						<table id="partlist">
 							<tbody>
@@ -737,11 +871,11 @@
 								</tr>
 								<tr>
 									<td>2kg PLA filament for 3D prints</td>
-									<td>40.5</td>
+									<td>60.75</td>
 								</tr>
 								<tr>
-									<td>4x Tower Pro MG995</td>
-									<td>32</td>
+									<td>5x Tower Pro MG996R</td>
+									<td>44</td>
 								</tr>
 								<tr>
 									<td>Adafruit PCA9685 servo controller</td>
@@ -754,6 +888,14 @@
 								<tr>
 									<td>AX SS HYRAX crawler tire 120mm diameter 4pc pack</td>
 									<td>30,52</td>
+								</tr>
+								<tr>
+									<td>SZBK07 300W buck converter</td>
+									<td>13</td>
+								</tr>
+								<tr>
+									<td>IRISTech W-25</td>
+									<td>26</td>
 								</tr>
 								<tr>
 									<td>Overall cost of components</td>
