@@ -610,6 +610,67 @@
 				</div>
 				<div>
 					<h1>Hardware</h1>
+                    <div>
+                        <h2>
+                            The custom PCB experiment
+                        </h2>
+                        <p>
+                            In the <a href="#5">RoboCup23</a> section, we wrote about a failed custom arm design.
+                            We will now go into more detail regarding its PCB design and what issues it had.
+                        </p>
+                        <p>
+                            The arm was meant to give us an edge, since we were told by acquintances that stepper
+                            motors were precise and have good torque. Just what we needed! Reality is rarely so simple though.
+                        </p>
+                        <p>
+                            One of the most popular hobby stepper motors is the
+                            <a href="https://www.hestore.hu/prod_10035505.html?lang=en">28BYJ-48</a>.
+                            This is what we settled on using. It's a simple, unipolar stepper motor which
+                            technically doesn't even require a driver circuit, only
+                            <a href="https://www.hestore.hu/prod_10035557.html?lang=en">a bunch of transistors</a>.
+                        </p>
+                        <h3>The PCB</h3>
+                        <p>
+                            Our arm was meant to have 6 actuators. Each motor has 4 windings that have to be
+                            controlled, meaning it would 24 GPIO pins. The Pi did not have enough pins to drive
+                            all motors, because we also had to drive our DC motors.
+                        </p>
+                        <p>
+                            Zsolt wanted to learn about PCB design, so we let him design a simple circuit, and this
+                            was the final result:
+                        </p>
+                        <img src="./img/kokanystepper_controller_schematic.jpg" alt="schematic">
+                        <p>
+                            As you can see, the circuit is just darlington transistor arrays hooked up to GPIO
+                            controllers. It was meant to be able to drive up to 8 motors.
+                        </p>
+                        <img src="./img/kokanystepper_controller_pcb.jpeg" alt="PCB layout">
+                        <p>
+                            The board has a 12V power and a ground plane on some inner layers.
+                            The I2C and GPIO traces are also all over the place, however in the case of the GPIO routing,
+                            it probably would have been fine.
+                        </p>
+                        <img src="./img/kokanystepper_controller_3d.jpeg" alt="3D view">
+                        <p>
+                            These are the final plans, the schematic of the initial prototype was a 2-layer board
+                            and had much narrower traces. The power pin and one of the windings were mixed up, and
+                            as you can see, even in the final design, the MCPs both shared the same address...
+                        </p>
+                        <p>
+                            However, all of these could have been fixed, but the number one issue with PCB was prototyping cost.
+                            While PLA filament for 3D printed parts
+                            is relatively cheap, having a PCB manufactured in Europe (we did not want to wait for shipping from Asia)
+                            was too costly to make it worth our while. Instead we opted for a single GPIO extender, and less actuators.
+                            Fun fact, the arm actually did work in Bordeaux, albeit for a single night:
+                        </p>
+                        <video controls>
+                            <source src="./vids/working-arm.webm">
+                        </video>
+                        <p>
+                            One day we might return to this idea, in the meantime,
+                            we are sharing the <a href="./kokanystepper_controller.zip" download>KiCAD project</a>.
+                        </p>
+                    </div>
 					<div>
 						<h2>The build and the development process of the robot.</h2>
 						<div class="robot-build">
@@ -627,24 +688,24 @@
 							<div class="wheels">
 								<h3>Movement structure</h3>
 								<p>
-									We were putting a lot of thought in our wheels, because in the
-									previous competitions the radius of the wheels weren't enough.
-									It always stuck on something high so this time we selected a
-									wheels which bigger in radius with that we started the
-									development for the rim the process was hard and we had many
+									We put a lot of thought into designing our wheels, because in the
+									previous competitions the diameter of the wheels weren't large enough.
+									It always got stuck on something high so this time we selected a
+									wheels which are bigger in diameter, with that we started the
+									development for the rim. The process was hard and we had many
 									fails in the implementation.
 								</p>
 								<p>
-									The very first version of the wheels had a very big issue. The
-									shaft was originaly separated from the rim so the wheels were
-									easily switchable but we redesigned it because we saw it
-									pointless as we were using the biggest tire possible and
-									didn't want to switch to a smaller one so we merged the shaft
-									into the rim, however we quickly realised it was a big
-									mistake. On the testing phrase the shaft broke on the
-									conecting part of the rim on strong impact. So we raised the
+									The very first version of the wheels had a significant issue. The
+									shaft was originaly separated from the rim, to allow the wheels
+									to be easily switched, but we redesigned it
+									as we were using the biggest tires possible and
+									never switched to smaller ones. So we merged the shaft
+									into the rim, however we quickly realised it was a
+									mistake. During a test, the shaft broke at the
+									conecting part of the rim on a strong impact. So we raised the
 									surface on the conntecting part of the rim and the shaft but
-									on the competition it broke again.
+									during MIRK, it broke again.
 								</p>
 								<div class="fails">
 									<div class="img-box">
@@ -657,7 +718,7 @@
 									</div>
 								</div>
 								<p>
-									So as we learned our mistakes we separated the shaft and rim
+									So as we learned from our mistakes we separated the shaft and rim
 									again. The shaft itself is made out of steel so it's durable
 									incase of an impact however the rim is 3D printed for our
 									tire. Here u can see the 3D designes of our wheels. The motor
