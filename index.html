@@ -41,14 +41,11 @@
 						2022, since then we have tried our best to participate in various
 						competitions and challenge ourselves with more complicated
 						projects. We all plan to go and study things related to robotics.
-                        Most of us are in our last year and soon will be brought
-						to a decision regarding our future. We all plan to attend to university
-						and learn more and more. We are good friends with each other and we
+                        We all plan to attend to university
+						and learn more. We are good friends with each other and we
 						try to help one another whenever we can. It is a mutual relationship between
 						us, team mebers. If one of us doesn't understand a concept, we discuss it
-                        and move forward with the development. Development is a fun and exhousting
-                        activity but the process is what's important: the trial and error is
-                        what it makes it soo much fun.
+                        and move forward with the development.
 					</p>
 				</div>
 				<div class="margintop">
@@ -131,11 +128,11 @@
 							provide 12V that we stepped down to 5V for the Raspberry Pi 4 and
 							the PCA9685. We used the cheapest hobby DC motors we had on hand,
 							which were controlled with a MotoZero and ran on 12V.
-							unfortunately the motors broke in some parts of the arena and we
-							couldn't reuse them in the following year. Our robotic arm for the
-							competition worked, and got us the win. We controlled the robot
-							with a PlayStation 4 controller, the code was written in Python
-							and can be viewed in this
+							unfortunately the motors broke down during the competition and we
+							couldn't reuse them in the following year. Our robotic arm built
+                            using servos worked well, and got us enough points to win.
+                            We controlled the robot with a PlayStation 4 controller,
+                            the code was written in Python and can be viewed in this
 							<a href="https://github.com/zsoltiv/robocup">repository</a>,
 						</p>
 					</div>
@@ -146,15 +143,13 @@
 							alt="Picture of the 2023 MIRK RMRC robot"
 						/>
 						<p>
-							We participated in MIRK the next year in 2023 as well, for which
-							we improved our motors and wheels. We used bigger wheels which
-							helped us in the uneven parts of the arena. We also switched the
-							robotic arm. This time we wanted to use a custom arm so we tried
-							our best to make one with the parts we found in the workshop.
-							Unfortunately the arm didn't work, it couldn't move. We also got
-							better motors, half of which were metal geared and the other half
+							We participated in MIRK the next year as well, for which
+							we used better motors and bigger wheels, which
+							helped us in the uneven parts of the arena. We used a different
+                            arm design, which unfortunately did not work.
+                            Half of our motors were metal geared and the other half
 							plastic geared. This was a big improvment because they didn't
-							break this time. After winning the championship our mentor, Mr.
+							break this time. After winning the championship, our mentor, Mr.
 							András Bakti encouraged us to test ourselves at RoboCup23.
 						</p>
 					</div>
@@ -166,22 +161,21 @@
 						/>
 						<p>
 							RoboCup 2023 in Bordeaux, France, was our first international
-							competition. Our main improvement was going to be a robotic arm.
+							competition. Our main improvement was going to be our custom
+                            robotic arm which we had been working on since MIRK.
 						</p>
 						<p>
-							Our robotic arm wasn't ready in time for that year's MIRK which
-							prevented us from achieving a higher score, so for RoboCup, we
-							designed an arm which used 28BYJ-48 stepper motors along with a
-							custom PCB for driving all 8 actuators. Unfortunately neither the
-							PCB nor the robotic arm worked well enough. We ended up scrapping
-							the PCB idea as prototyping it was costly (Zsolt had accidentally
-							mixed up two traces which made our first prototype completely
-							useless). We also forgot a crucial aspect of designing the arm: We
-							didn't account for how much weight the motors could hold.
-							Unfortunately not enough. When we supplied the motors with 5 volts
-							(the recommended voltage) the arm couldn't move. Eventually we
-							tried supplying 12V, which did work, but skyrocketed the energy
-							consumption and melted the arm in places.
+                            The arm was meant to use 28BYJ-48 stepper motors all driven with a
+                            custom PCB with a couple of
+                            <a href="https://www.hestore.hu/prod_getfile.php?id=15411">GPIO chips</a> connected to
+                            <a href="https://www.hestore.hu/prod_getfile.php?id=11958">darlington transistor arrays</a>
+                            providing enough IO for up to 8 stepper motors.
+                            However we soon dropped our custom PCB idea as having the design
+                            manufactured was costly and also required soldering SMD components
+                            with which the team had no prior experience. We ended up using a
+                            single GPIO extender IC (also MCP23017 but in a through-hole package),
+                            and we reduced the number of actuators in our arm. In the end,
+                            our arm still did not work. The details are in a later section.
 						</p>
 						<p>
 							The sockets for the motors were 3D printed and the rough
@@ -190,7 +184,8 @@
 						</p>
 						<p>
 							An other challenge was the camera streaming and the image
-							recognition, the latter of which was not working either. Zsolt had
+							recognition, the latter of which was not working either due to
+                            a lack of experinece with machine learning. Zsolt had
 							spent a great amount of time on debugging and programming.
 						</p>
 						<p>
@@ -209,21 +204,21 @@
 							Hungary. With this we were three times Hungarian champions.
 						</p>
 						<p>
-							Kókánybot had come a long way. We moved our motors in line with
+							Kókánybot had come a long way. We moved our motors next to
 							our electronics, decreasing the robot's height and optimizing the
 							weight distribution. We switched the energy source from salvaged
 							18650 lithium-ion batteries to a 20V Parkside drill battery,
-							however this way we had to add an extra buck converter. We also
+							however we had to add an extra buck converter. We also
 							switched back to using MotoZero from the previously used L298N
 							board due to space constraints, however the MotoZero could easily
 							overheat, so we needed to install a fan and put a heatsink on it
-							to prevent the driver from overheating. We switched from steppers
-							to servo motors. We had also realized that the 3D printed arm
+							to prevent the circuits from overheating. We switched from steppers
+							back to servo motors. We had also realized that the 3D printed arm
 							wasn't durable enough so we used some metal parts we had on hand
 							and built an arm out of those. For driving the arm, we used
-							<a href="">Adafruit's PCA9685 board</a>. We also fixed the camera
-							latency issues and intalled a second camera for on the robot's
-							rear.
+							<a href="https://www.adafruit.com/product/815">Adafruit's PCA9685 board</a>.
+                            We also fixed the camera latency issues and intalled a second camera for
+                            on the robot's rear end.
 						</p>
 						<p>
 							We had two operators. One was driving robot and the other was
@@ -238,7 +233,7 @@
 						<h2>Human-robot interface</h2>
 						<p>
 							We can interact with our robot via any laptop or desktop computer
-							(although that isn't very practical), using either a Wireless or
+							(although the latter isn't very practical), using either a Wireless or
 							Ethernet (our choice) connection.
 						</p>
 						<p>
@@ -479,7 +474,7 @@
 						</p>
 					</div>
 					<div>
-						<h2>4.1 Training an object detection model</h2>
+						<h2>Training an object detection model</h2>
 
 						<p>
 							Last time, one of the most challenging aspects of the competition
@@ -522,7 +517,7 @@
 						/>
 					</div>
 					<div>
-						<h2>4.2 Communication</h2>
+						<h2>Communication</h2>
 						<p>
 							We interact with our robot using a few custom programs, named
 							KókányControl (kokanyctl) and KókányRecognize (kokanyrecognize).
@@ -609,26 +604,26 @@
 						</p>
 					</div>
 					<div>
-						<h2>4.3 Human-robot interface</h2>
+						<h2>Human-robot interface</h2>
 						<p>Still thinkking</p>
 					</div>
 				</div>
 				<div>
 					<h1>Hardware</h1>
 					<div>
-						<h2>5.1 Setup and packing, operation station</h2>
+						<h2>Setup and packing, operation station</h2>
 					</div>
 					<div>
-						<h2>5.2 Mission strategy</h2>
+						<h2>Mission strategy</h2>
 					</div>
 					<div>
-						<h2>5.3 Tests and experiments</h2>
+						<h2>Tests and experiments</h2>
 					</div>
 					<div>
-						<h2>5.4 Strenght of the robot on the field</h2>
+						<h2>Strenght of the robot on the field</h2>
 					</div>
 					<div>
-						<h2>5.5 The build and the development process of the robot.</h2>
+						<h2>The build and the development process of the robot.</h2>
 						<div class="robot-build">
 							<h3>The building logics of our robots</h3>
 							<p>
@@ -756,7 +751,7 @@
 					</div>
 				</div>
 				<div>
-					<h1>6. What we learned so far</h1>
+					<h1>What we learned so far</h1>
 					<p>
 						In the beginning we used
 						<a href="https://www.tinkercad.com/">TinkerCAD</a>
@@ -768,7 +763,7 @@
 					</p>
 				</div>
 				<div>
-					<h1>7. What are we gonna do until the competition</h1>
+					<h1>What are we gonna do until the competition</h1>
 					<p>
 						We are facing an upcoming "event" in our life. In our country this
 						time of the year amd age all highschool student will be attending a
@@ -781,9 +776,9 @@
 					</p>
 				</div>
 				<div>
-					<h1>8. Software packeges and hardware components</h1>
+					<h1>Software packages and hardware components</h1>
 					<div>
-						<h2>8.1 Software packeges</h2>
+						<h2>Software packages</h2>
 						<table>
 							<tbody>
 								<tr class="odd">
@@ -905,7 +900,7 @@
 						</table>
 					</div>
 					<div>
-						<h2>8.2 hardware Components and estimated prices</h2>
+						<h2>hardware Components and estimated prices</h2>
 						<table id="partlist">
 							<tbody>
 								<tr>
